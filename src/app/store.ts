@@ -3,7 +3,7 @@ import postsReducer from '@/features/posts/postsSlice'
 
 export const store = configureStore({
   reducer: {
-    post: postsReducer,
+    posts: postsReducer,
   },
 })
 
