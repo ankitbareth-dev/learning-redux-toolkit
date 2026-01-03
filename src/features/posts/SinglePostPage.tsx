@@ -4,6 +4,7 @@ import { useAppSelector } from '@/app/hooks'
 import { selectPostById } from './postsSlice'
 import { PostAuthor } from './PostAuthor'
 import { TimeAgo } from '@/components/TimeAgo'
+import { ReactionButtons } from './ReactionButtons'
 
 export const SinglePostPage = () => {
   const { postId } = useParams()
@@ -24,6 +25,7 @@ export const SinglePostPage = () => {
         <p className="post-content">{post.content}</p>
         <PostAuthor userId={post.user} />
         <TimeAgo timestamp={post.date} />
+        <ReactionButtons post={post} />
 
         <Link to={`/editPost/${post.id}`} className="button">
           Edit Post
