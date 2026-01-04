@@ -6,6 +6,7 @@ import { LoginPage } from './features/auth/LoginPage'
 import { PostsMainPage } from './features/posts/PostsMainPage'
 import { SinglePostPage } from './features/posts/SinglePostPage'
 import { EditPostForm } from './features/posts/EditPostForm'
+import { NotificationsList } from './features/notifications/NotificationsList'
 
 import { selectCurrentUsername } from './features/auth/authSlice'
 import { UsersList } from './features/users/UsersList'
@@ -38,6 +39,7 @@ function App() {
                   <Route path="/editPost/:postId" element={<EditPostForm />} />
                   <Route path="/users" element={<UsersList />} />
                   <Route path="/users/:userId" element={<UserPage />} />
+                  <Route path="/notifications" element={<NotificationsList />} />
                 </Routes>
               </ProtectedRoute>
             }
