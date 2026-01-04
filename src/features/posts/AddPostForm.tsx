@@ -35,7 +35,6 @@ export const AddPostForm = () => {
       <form onSubmit={handleSubmit}>
         <label htmlFor="postTitle">Post Title:</label>
         <input type="text" id="postTitle" defaultValue="" required />
-        <label htmlFor="postAuthor">Author:</label>
 
         <label htmlFor="postContent">Content:</label>
         <textarea id="postContent" name="postContent" defaultValue="" required />
