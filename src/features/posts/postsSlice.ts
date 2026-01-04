@@ -120,6 +120,11 @@ export default postsSlice.reducer
 
 export const selectAllPosts = (state: RootState) => state.posts.posts
 
+export const selectPostsByUser = (state: RootState, userId: string) => {
+  const allPosts = selectAllPosts(state)
+  return allPosts.filter((post) => post.user === userId)
+}
+
 export const selectPostById = (state: RootState, postId: string) => state.posts.posts.find((post) => post.id === postId)
 
 export const selectPostsStatus = (state: RootState) => state.posts.status
