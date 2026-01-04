@@ -25,6 +25,17 @@ export interface Post {
 }
 
 type PostUpdate = Pick<Post, 'id' | 'title' | 'content'>
+type NewPost = Pick<Post, 'title' | 'content' | 'user'>
+
+export const addNewPost = createAppAsyncThunk(
+  'posts/addNewPost',
+
+  async (initialPost: NewPost) => {
+    const response = await client.post<Post>('/fakeApi/posts', initialPost)
+
+    return response.data
+  },
+)
 
 const initialReactions: Reactions = {
   thumbsUp: 0,
@@ -66,23 +77,6 @@ const postsSlice = createSlice({
   name: 'posts',
   initialState,
   reducers: {
-    postAdded: {
-      reducer(state, action: PayloadAction<Post>) {
-        state.posts.push(action.payload)
-      },
-      prepare(title: string, content: string, userId: string) {
-        return {
-          payload: {
-            id: nanoid(),
-            date: new Date().toISOString(),
-            title,
-            content,
-            user: userId,
-            reactions: initialReactions,
-          },
-        }
-      },
-    },
     postUpdated(state, action: PayloadAction<PostUpdate>) {
       const { id, title, content } = action.payload
       const existingPost = state.posts.find((post) => post.id === id)
@@ -114,10 +108,13 @@ const postsSlice = createSlice({
       .addCase(fetchPosts.rejected, (state) => {
         state.status = 'failed'
       })
+      .addCase(addNewPost.fulfilled, (state, action) => {
+        state.posts.push(action.payload)
+      })
   },
 })
 
-export const { postAdded, postUpdated, reactionAdded } = postsSlice.actions
+export const { postUpdated, reactionAdded } = postsSlice.actions
 
 export default postsSlice.reducer
 
