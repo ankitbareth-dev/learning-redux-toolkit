@@ -4,6 +4,8 @@ import usersReducer from '@/features/users/usersSlice'
 import authReducer from '@/features/auth/authSlice'
 import notificationReducer from '@/features//notifications/notificationsSlice'
 
+import { listenerMiddleware } from './listenerMiddleware'
+
 export const store = configureStore({
   reducer: {
     auth: authReducer,
@@ -11,6 +13,7 @@ export const store = configureStore({
     users: usersReducer,
     notifications: notificationReducer,
   },
+  middleware: (getDefaultMiddleware) => getDefaultMiddleware().prepend(listenerMiddleware.middleware),
 })
 
 export type AppStore = typeof store
